@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Project</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: 'Georgia', serif;
+        background-color: #f2f2f2;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .artist-info {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .artist-info h1 {
+        font-size: 2em;
+        margin-bottom: 0.5em;
+      }
+
+      .artist-info h2 {
+        font-size: 1.3em;
+        margin-bottom: 1em;
+      }
+
+      .album-image {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .album-image img {
+        max-width: 80%;
+      }
+
+      .track-preview {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .track-preview audio {
+        max-width: 100%;
+      }
+
+      .button {
+        display: block;
+        text-align: center;
+        margin-top: 10px;
+        background-color: #333;
+        color: #fff;
+        text-decoration: none;
+        padding: 5px 10px;
+        border-radius: 5px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      .biography {
+        text-align: justify;
+        margin-bottom: 20px;
+        margin-top: 20px;
+      }
+
+      .biography h3 {
+        text-align: center;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+
+      .biography p {
+        margin-bottom: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="artist-info">
+        <h1>{{.Artist}}</h1>
+        <h2>{{.Track}}</h2>
+      </div>
+      <div class="album-image">
+        <img src="{{.AlbumImage}}" alt="Album cover">
+      </div>
+      <div class="track-preview">
+        <audio controls>
+          <source src="{{.TrackPreview}}" type="audio/mpeg">
+        </audio>
+        <a href="{{.TrackLink}}" class="button">Listen to the full track</a>
+      </div>
+      <div class="biography">
+        <h3>Biography</h3>
+        <p>{{.Biography}}</p>
+        <a href="{{.BiographyLink}}" class="button">Wikipedia</a>
+      </div>
+    </div>
+  </body>
+</html>
