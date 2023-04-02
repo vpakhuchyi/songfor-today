@@ -11,7 +11,6 @@ import (
 )
 
 const (
-	appID  = "app_id"
 	secret = "secret"
 	code   = "code"
 )
@@ -34,7 +33,6 @@ func (c *Client) GetAccessToken(ctx context.Context, params models.GetAccessToke
 		SetContext(ctx).
 		SetQueryParams(
 			map[string]string{
-				appID:  params.AppID,
 				secret: params.Secret,
 				code:   params.Code,
 			},
