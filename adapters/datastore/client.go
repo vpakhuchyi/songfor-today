@@ -25,7 +25,7 @@ func (a *Adapter) PutTracks(ctx context.Context, tracks []models.Track) error {
 		keys[i] = datastore.IDKey(kindTrack, int64(tracks[i].ID), nil)
 	}
 
-	if _, err := a.ds.PutMulti(ctx, keys, &tracks); err != nil {
+	if _, err := a.ds.PutMulti(ctx, keys, tracks); err != nil {
 		return fmt.Errorf("failed to save tracks: %w", err)
 	}
 
@@ -36,7 +36,7 @@ func (a *Adapter) GetAllTracks(ctx context.Context) ([]models.Track, error) {
 	q := datastore.NewQuery(kindTrack)
 
 	var tracks []models.Track
-	if _, err := a.ds.GetAll(ctx, q, &tracks); err != nil {
+	if _, err := a.ds.GetAll(ctx, q, tracks); err != nil {
 		return nil, fmt.Errorf("failed to get all tracks: %w", err)
 	}
 
