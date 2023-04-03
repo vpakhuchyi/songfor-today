@@ -3,13 +3,13 @@ package main
 import (
 	"context"
 
-	gcpdatastore "cloud.google.com/go/datastore"
+	gcpdatastore "cloud.google.com/go/firestore"
 	"github.com/go-resty/resty/v2"
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/exp/slog"
 
 	"github.com/vpakhuchyi/songfor-today/adapters/auth"
-	"github.com/vpakhuchyi/songfor-today/adapters/datastore"
+	"github.com/vpakhuchyi/songfor-today/adapters/firestore"
 	"github.com/vpakhuchyi/songfor-today/config"
 	"github.com/vpakhuchyi/songfor-today/handlers"
 	"github.com/vpakhuchyi/songfor-today/logger"
@@ -31,20 +31,20 @@ func main() {
 		return
 	}
 
-	ds, err := gcpdatastore.NewClient(ctx, cfg.ProjectID)
+	fs, err := gcpdatastore.NewClient(ctx, cfg.ProjectID)
 	if err != nil {
 		slog.ErrorCtx(ctx, "Failed to create client", "err", err)
 
 		return
 	}
-	defer ds.Close()
+	defer fs.Close()
 
-	datastoreAdapter := datastore.New(ds)
+	firestoreAdapter := firestore.New(fs)
 	restyClient := resty.New()
 	authAdapter := auth.New(restyClient, cfg.Authorization)
 	authClient := handlers.NewAuthorizer(authAdapter, cfg, sm)
 	//deezerAdapter := deezer.New(restyClient)
-	tracksUsecases := usecases.New(&datastoreAdapter)
+	tracksUsecases := usecases.New(&firestoreAdapter)
 	tracksClient := handlers.NewTracks(tracksUsecases, cfg)
 
 	app.Static("/termsofuse", "./static/termsofuse.html")

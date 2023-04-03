@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/vpakhuchyi/songfor-today/adapters/datastore"
 	"github.com/vpakhuchyi/songfor-today/models"
 )
 
