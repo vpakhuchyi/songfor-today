@@ -5,14 +5,15 @@ import (
 	"fmt"
 	"math/rand"
 
+	"github.com/vpakhuchyi/songfor-today/adapters/firestore"
 	"github.com/vpakhuchyi/songfor-today/models"
 )
 
 type Client struct {
-	ds *datastore.Adapter
+	ds *firestore.Adapter
 }
 
-func New(ds *datastore.Adapter) Client {
+func New(ds *firestore.Adapter) Client {
 	return Client{ds: ds}
 }
 
